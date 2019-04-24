@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="huge_space">32dp</dimen>
+    <dimen name="big_space">16dp</dimen>
+    <dimen name="greater_space">12dp</dimen>
+    <dimen name="medium_space">8dp</dimen>
+    <dimen name="small_space">4dp</dimen>
+
+    <dimen name="default_line_thickness">0.75dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="font_microscopic">11sp</dimen>
+    <dimen name="font_tiny">13sp</dimen>
+    <dimen name="font_small">14sp</dimen>
+    <dimen name="font_smaller">16sp</dimen>
+    <dimen name="font_medium">18sp</dimen>
+    <dimen name="font_big">20sp</dimen>
+    <dimen name="font_large">22sp</dimen>
+    <dimen name="font_huge">30sp</dimen>
+
+    <dimen name="quiz_item_height">200dp</dimen>
+</resources>

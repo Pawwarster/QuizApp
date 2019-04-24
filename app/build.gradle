@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "pl.pawwar.quizapp"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        archivesBaseName = "QuizApp-${versionName}_build_$versionCode"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore_debug.jks")
+            storePassword "lig11i"
+            keyAlias "quizapp"
+            keyPassword "quizapp"
+        }
+        release {
+            storeFile file("../keystore_release.jks")
+            storePassword "lig11i"
+            keyAlias "quizappRelease"
+            keyPassword "quizapp"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix = ".debug"
+        }
+        debugProd {
+            initWith buildTypes.debug
+            matchingFallbacks = ['debug']
+            applicationIdSuffix = ".prodDebug"
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:preference-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    implementation 'org.koin:koin-android:0.9.1'
+    implementation 'org.koin:koin-android-architecture:0.9.1'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-kotlin:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle-kotlin:2.2.1'
+
+    implementation 'com.jakewharton.timber:timber:4.6.1'
+
+    implementation 'com.android.support:cardview-v7:27.1.1'
+
+    //    An in-app HTTP inspector for Android OkHttp clients
+    debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+
+
+    implementation 'com.github.maciekczwa:bundle-helper:old_android_fix-SNAPSHOT'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
+}
+
+// Just for let know how to deploy version on test server by git --tags
+android.applicationVariants.all { variant ->
+    variant.outputs.each { output ->
+        if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+            task "publishTest${variant.name.capitalize()}"(dependsOn: variant.assemble) doLast {
+                def outputFile = output.outputFile
+                println "output: $outputFile"
+                exec {
+                    executable 'sftp'
+                    args "test.test.pl:test/android/QuizApp"
+                    standardInput = new ByteArrayInputStream("put $outputFile".getBytes("UTF-8"))
+                }
+            }
+        }
+    }
+}

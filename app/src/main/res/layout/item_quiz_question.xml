@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/quiz_item_height" 
+        android:layout_margin="@dimen/medium_space" />
+    
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/navy_blue"
+        android:textSize="@dimen/font_medium"
+        android:layout_marginRight="@dimen/medium_space"
+        android:layout_marginLeft="@dimen/medium_space"
+        android:layout_marginBottom="@dimen/medium_space" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/medium_space"
+        android:layout_marginLeft="@dimen/medium_space"/>
+
+</LinearLayout>

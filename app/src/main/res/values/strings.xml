@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+
+    <string name="error_unknown">Wystąpił nieznany błąd, spróbuj ponownie.</string>
+    <string name="error_network">Wystąpił problem z połączeniem. Sprawdź połączenie internetowe i spróbuj ponownie.</string>
+    <string name="error_internet_connection">Błąd połączenia internetowego</string>
+    <string name="not_yet_implemented">Funkcja jeszcze nie została zaimplementowana</string>
+
+    <string name="refresh">Odśwież</string>
+
+    <string name="press_again_to_exit">Naciśnij ponownie, aby wyjść.</string>
+
+    <string name="title_quiz_list">Lista quizów</string>
+    <string name="title_quiz_questions">Pytania</string>
+    <string name="loading_title">Trwa ładowanie</string>
+    <string name="title_final_score">Twój wynik</string>
+
+    <string name="button_back">Wróć do listy quizów</string>
+    <string name="button_again">Spróbuj jeszcze raz</string>
+
+    <string name="offline_quiz_monit">Niestety wybrany quiz nie został pobrany i nie może być użyty w trybie offline</string>
+</resources>
